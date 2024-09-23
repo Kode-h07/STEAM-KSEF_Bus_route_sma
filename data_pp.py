@@ -35,4 +35,7 @@ filtered_df = filtered_df.drop(columns=["시군명", "중앙차로여부", "관�
 
 filtered_df = filtered_df.reset_index(drop=True)
 
+
+filtered_df = filtered_df.drop_duplicates(subset=["정류소명"])
+
 filtered_df.to_csv("seorak.csv", encoding="euc-kr", index=True)
