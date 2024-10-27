@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 file_path = "버스정류소현황.csv"
 
@@ -37,5 +38,8 @@ filtered_df = filtered_df.reset_index(drop=True)
 
 
 filtered_df = filtered_df.drop_duplicates(subset=["정류소명"])
+
+"pheromone = attrativeness of a food to the slime => ex)num of passengers in that station can be set"
+filtered_df["pheromone"] = np.random.randint(1, 11, size=len(filtered_df))
 
 filtered_df.to_csv("seorak.csv", encoding="euc-kr", index=True)

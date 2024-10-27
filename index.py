@@ -15,7 +15,7 @@ dish = Dish(
     decay=0.2,
 )
 
-dish.animate(frames=350, interval=100, filename="350steps.gif")
+dish.animate(frames=350, interval=100, filename="350steps_pheromonevar.gif")
 plt.show()
 
 fig = plt.figure(figsize=(6.3, 5))
@@ -27,4 +27,4 @@ nx.draw(
     node_size=12,
     with_labels=False,
 )
-plt.savefig("slime_graph_350steps.png")
+plt.savefig("slime_graph_350steps_pheromonevar.png")

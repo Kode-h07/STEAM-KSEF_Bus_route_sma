@@ -49,13 +49,14 @@ class Dish:
         for i, station in foods.iterrows():
             idx = (station["x"], station["y"])
             value = station["value"]
+            pheromone = station.get("pheromone", 10.0)
 
             self.food_positions[i] = idx
 
             for x in range(value // 2):
                 for y in range(value // 2):
                     food_idx = (idx[0] - x, idx[1] - y)
-                    food = FoodCell(food_id=i, food_idx=food_idx)
+                    food = FoodCell(food_id=i, food_idx=food_idx, pheromone=pheromone)
                     self.lattice[food_idx] = food
 
                     # add food idx
