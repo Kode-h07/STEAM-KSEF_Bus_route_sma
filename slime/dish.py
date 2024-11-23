@@ -130,9 +130,9 @@ class Dish:
 
         ani = FuncAnimation(fig, func, frames=frames, blit=True, interval=interval)
         fps = 1 / (interval / 1000)
-        filename is not None and ani.save(
-            filename, dpi=150, writer=PillowWriter(fps=fps)
-        )
+        if filename is not None:
+            ani.save(filename, dpi=150, writer=PillowWriter(fps=fps))
+        plt.close(fig)  # Close the figure after saving the animation
         return ani
 
     def get_all_foods_idx(self):

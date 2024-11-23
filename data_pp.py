@@ -1,4 +1,3 @@
-# -*- coding: euc-kr -*-
 import pandas as pd
 import numpy as np
 import os
@@ -11,6 +10,10 @@ import matplotlib.pyplot as plt
 import sys
 sys.stdout.reconfigure(encoding="euc-kr")
 
+def apply_hyperparameters(df, pheromone_scale, pheromone_offset):
+    df["pheromone"] = (df["normalized_passenger_count"] * pheromone_scale) + pheromone_offset
+    return df
+
 def calculate_distance(x1, y1, x2, y2):
     return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
@@ -21,12 +24,11 @@ file_path = "bus_stations.csv"
 df = pd.read_csv(file_path, encoding="euc-kr")
 
 # Filter rows for specific bus stop locations
-filtered_df = df[df["À§Ä¡"].str.contains("°æ±âµµ °¡Æò±º ¼³¾Ç¸é", na=False)].copy()
+filtered_df = df[df["ìœ„ì¹˜"].str.contains("ê²½ê¸°ë„ ê°€í‰êµ° ì„¤ì•…ë©´", na=False)].copy()
 
 # Add latitude, longitude, and some additional columns for calculations
-filtered_df.loc[:, "lat"] = filtered_df["WGS84À§µµ"]
-filtered_df.loc[:, "lon"] = filtered_df["WGS84°æµµ"]
-filtered_df.loc[:, "value"] = 4
+filtered_df.loc[:, "lat"] = filtered_df["WGS84lat"]
+filtered_df.loc[:, "lon"] = filtered_df["WGS84lon"]
 
 # Normalize latitude and longitude to a custom grid
 min_lon = filtered_df["lon"].min()
@@ -48,10 +50,10 @@ filtered_df.loc[:, "nodes"] = filtered_df[["x", "y"]].apply(tuple, axis=1)
 filtered_df = filtered_df.drop_duplicates(subset=["nodes"]).reset_index(drop=True)
 
 # Remove unnecessary columns
-filtered_df = filtered_df.drop(columns=["½Ã±º¸í", "Áß¾ÓÂ÷·Î¿©ºÎ", "°üÇÒ°üÃ»", "À§Ä¡"])
+filtered_df = filtered_df.drop(columns=["ì‹œêµ°ëª…", "ì¤‘ì•™ì°¨ë¡œì—¬ë¶€", "ê´€í• ê´€ì²­", "ìœ„ì¹˜"])
 
 # Drop duplicates in bus stop names
-filtered_df = filtered_df.drop_duplicates(subset=["Á¤·ù¼Ò¸í"])
+filtered_df = filtered_df.drop_duplicates(subset=["ì •ë¥˜ì†Œëª…"])
 
 
 #filtered_df.to_csv("seorak.csv", encoding="euc-kr", index=True)
@@ -81,7 +83,7 @@ passenger_counts = []
 passengers_folder = "passengers"
 
 # Iterate through each bus stop name in the filtered dataframe
-for stop_name in filtered_df["Á¤·ù¼Ò¸í"]:
+for stop_name in filtered_df["ì •ë¥˜ì†Œëª…"]:
     csv_file = f"{stop_name}.csv"
     file_path = os.path.join(passengers_folder, csv_file)
 
@@ -154,33 +156,10 @@ else:
     filtered_df["normalized_passenger_count"] = 0  # All values are the same, so set to 0 (or 1 depending on the choice)
 
 # Print the normalized passenger count for verification
-max_station = filtered_df.loc[filtered_df["normalized_passenger_count"].idxmax(), "Á¤·ù¼Ò¸í"]
-
-# Find the station with the minimum normalized passenger count
-min_station = filtered_df.loc[filtered_df["normalized_passenger_count"].idxmin(), "Á¤·ù¼Ò¸í"]
 
 # Multiply the normalized passenger count by 15 and add 5 
 #hyperparameter
-filtered_df["pheromone"] = (filtered_df["normalized_passenger_count"] * 15) + 5
-
-# Print the updated DataFrame to verify the changes
-print(filtered_df[["Á¤·ù¼Ò¸í", "normalized_passenger_count", "pheromone"]])
-
-plt.figure(figsize=(10, 6))
-
-# Use Seaborn to create the histogram with density curve
-sns.histplot(filtered_df["pheromone"], kde=True, bins=20, color='blue', stat="density")
-
-# Set plot labels and title
-plt.title("Distribution of pheromone", fontsize=16)
-plt.xlabel("pheromone", fontsize=12)
-plt.ylabel("Density", fontsize=12)
-
-# Show the plot
-plt.show()
-
-
-
+filtered_df["pheromone"] = (filtered_df["normalized_passenger_count"] * 19.861105709313733) + 8.738
 
 # Optionally, save the results to a new CSV file
-filtered_df.to_csv("seorak.csv", encoding="euc-kr", index=True)
+filtered_df.to_csv("seorak.csv", encoding="euc-kr", index=False)
