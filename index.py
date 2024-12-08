@@ -171,3 +171,5 @@ print(
     "Number of edges in the graph connected by slime mould: "
     + str(len(dish.get_food_graph().edges))
 )
+
+print("adjacency list:" + str(dish.adjacency_list()))

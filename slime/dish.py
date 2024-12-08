@@ -161,3 +161,10 @@ class Dish:
 
     def get_dish_size(self):
         return self.dish_size
+
+    def adjacency_list(self):
+        """
+        Returns the adjacency list for all nodes in the food network (food graph).
+        :return: Adjacency list as a dictionary
+        """
+        return dict(self.food_graph.adjacency())
