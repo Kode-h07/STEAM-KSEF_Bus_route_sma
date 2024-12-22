@@ -1,53 +1,93 @@
-Pheromone scale: 13.6687, Pheromone offset: 12.7969, Clustering Coefficient: 0.0126, Characteristic Path Length: 12.1536, Small-World Metric: 0.0010
-Pheromone scale: 18.9167, Pheromone offset: 5.9997, Clustering Coefficient: 0.0676, Characteristic Path Length: 11.8663, Small-World Metric: 0.0057
-Pheromone scale: 16.6742, Pheromone offset: 6.4287, Clustering Coefficient: 0.0587, Characteristic Path Length: 11.5646, Small-World Metric: 0.0051
-Pheromone scale: 11.1282, Pheromone offset: 12.2200, Clustering Coefficient: 0.0676, Characteristic Path Length: 11.4456, Small-World Metric: 0.0059
-Pheromone scale: 10.0156, Pheromone offset: 14.9221, Clustering Coefficient: 0.0585, Characteristic Path Length: 9.9319, Small-World Metric: 0.0059
-Pheromone scale: 22.2331, Pheromone offset: 5.0707, Clustering Coefficient: 0.0466, Characteristic Path Length: 10.7332, Small-World Metric: 0.0043
-Pheromone scale: 20.4955, Pheromone offset: 8.9986, Clustering Coefficient: 0.0234, Characteristic Path Length: 11.4592, Small-World Metric: 0.0020
-Pheromone scale: 29.4751, Pheromone offset: 7.3277, Clustering Coefficient: 0.0513, Characteristic Path Length: 12.8603, Small-World Metric: 0.0040
-Pheromone scale: 22.3677, Pheromone offset: 8.8246, Clustering Coefficient: 0.0459, Characteristic Path Length: 12.0452, Small-World Metric: 0.0038
-Pheromone scale: 19.3353, Pheromone offset: 13.5994, Clustering Coefficient: 0.0000, Characteristic Path Length: 10.1268, Small-World Metric: 0.0000
-Pheromone scale: 10.0000, Pheromone offset: 10.2371, Clustering Coefficient: 0.0359, Characteristic Path Length: 12.9645, Small-World Metric: 0.0028
-Pheromone scale: 24.4516, Pheromone offset: 11.4336, Clustering Coefficient: 0.0463, Characteristic Path Length: 12.0214, Small-World Metric: 0.0038
-Pheromone scale: 10.0293, Pheromone offset: 10.5844, Clustering Coefficient: 0.0622, Characteristic Path Length: 9.9868, Small-World Metric: 0.0062
-Pheromone scale: 16.3404, Pheromone offset: 7.3852, Clustering Coefficient: 0.0253, Characteristic Path Length: 13.7416, Small-World Metric: 0.0018
-Pheromone scale: 10.0000, Pheromone offset: 11.8098, Clustering Coefficient: 0.0522, Characteristic Path Length: 11.3195, Small-World Metric: 0.0046
-Pheromone scale: 10.0669, Pheromone offset: 13.4106, Clustering Coefficient: 0.0343, Characteristic Path Length: 10.5315, Small-World Metric: 0.0033
-Pheromone scale: 10.2065, Pheromone offset: 9.7045, Clustering Coefficient: 0.0657, Characteristic Path Length: 10.3767, Small-World Metric: 0.0063
-Pheromone scale: 29.4442, Pheromone offset: 13.5640, Clustering Coefficient: 0.0455, Characteristic Path Length: 11.8669, Small-World Metric: 0.0038
-Pheromone scale: 15.1259, Pheromone offset: 14.5463, Clustering Coefficient: 0.0253, Characteristic Path Length: 11.8145, Small-World Metric: 0.0021
-Pheromone scale: 29.8207, Pheromone offset: 11.7267, Clustering Coefficient: 0.0488, Characteristic Path Length: 11.8946, Small-World Metric: 0.0041
-Pheromone scale: 29.9214, Pheromone offset: 8.3784, Clustering Coefficient: 0.0000, Characteristic Path Length: 12.7058, Small-World Metric: 0.0000
-Pheromone scale: 21.1069, Pheromone offset: 6.3881, Clustering Coefficient: 0.0373, Characteristic Path Length: 11.7977, Small-World Metric: 0.0032
-Pheromone scale: 10.0793, Pheromone offset: 13.2155, Clustering Coefficient: 0.0662, Characteristic Path Length: 11.0304, Small-World Metric: 0.0060
-Pheromone scale: 29.9930, Pheromone offset: 6.5567, Clustering Coefficient: 0.0128, Characteristic Path Length: 12.5152, Small-World Metric: 0.0010
-Pheromone scale: 29.9075, Pheromone offset: 10.0508, Clustering Coefficient: 0.0459, Characteristic Path Length: 10.4682, Small-World Metric: 0.0044
-Pheromone scale: 10.4416, Pheromone offset: 12.4992, Clustering Coefficient: 0.0126, Characteristic Path Length: 12.0373, Small-World Metric: 0.0010
-Pheromone scale: 10.3373, Pheromone offset: 11.6786, Clustering Coefficient: 0.0545, Characteristic Path Length: 10.7480, Small-World Metric: 0.0051
-Pheromone scale: 10.1707, Pheromone offset: 5.1707, Clustering Coefficient: 0.0746, Characteristic Path Length: 12.5110, Small-World Metric: 0.0060
-Pheromone scale: 10.0000, Pheromone offset: 7.5272, Clustering Coefficient: 0.0726, Characteristic Path Length: 11.1554, Small-World Metric: 0.0065
-Pheromone scale: 29.8717, Pheromone offset: 8.0327, Clustering Coefficient: 0.0282, Characteristic Path Length: 13.8681, Small-World Metric: 0.0020
-Pheromone scale: 23.5086, Pheromone offset: 8.7569, Clustering Coefficient: 0.0529, Characteristic Path Length: 11.9861, Small-World Metric: 0.0044
-Pheromone scale: 29.8467, Pheromone offset: 11.6872, Clustering Coefficient: 0.0000, Characteristic Path Length: 12.7576, Small-World Metric: 0.0000
-Pheromone scale: 19.4710, Pheromone offset: 10.4946, Clustering Coefficient: 0.0641, Characteristic Path Length: 10.4857, Small-World Metric: 0.0061
-Pheromone scale: 14.6435, Pheromone offset: 13.0743, Clustering Coefficient: 0.0000, Characteristic Path Length: 10.2219, Small-World Metric: 0.0000
-Pheromone scale: 10.1387, Pheromone offset: 5.0000, Clustering Coefficient: 0.0606, Characteristic Path Length: 10.5604, Small-World Metric: 0.0057
-Pheromone scale: 26.4632, Pheromone offset: 14.8250, Clustering Coefficient: 0.0455, Characteristic Path Length: 12.1027, Small-World Metric: 0.0038
-Pheromone scale: 27.0692, Pheromone offset: 5.2698, Clustering Coefficient: 0.0882, Characteristic Path Length: 9.7877, Small-World Metric: 0.0090
-Pheromone scale: 27.0695, Pheromone offset: 5.1749, Clustering Coefficient: 0.0615, Characteristic Path Length: 10.2779, Small-World Metric: 0.0060
-Pheromone scale: 15.1538, Pheromone offset: 6.1633, Clustering Coefficient: 0.0128, Characteristic Path Length: 9.6456, Small-World Metric: 0.0013
-Pheromone scale: 25.8547, Pheromone offset: 6.5066, Clustering Coefficient: 0.0368, Characteristic Path Length: 11.5098, Small-World Metric: 0.0032
-Pheromone scale: 27.3921, Pheromone offset: 6.3380, Clustering Coefficient: 0.0126, Characteristic Path Length: 10.5152, Small-World Metric: 0.0012
-Pheromone scale: 20.1912, Pheromone offset: 5.5285, Clustering Coefficient: 0.0379, Characteristic Path Length: 9.8774, Small-World Metric: 0.0038
-Pheromone scale: 21.4873, Pheromone offset: 5.7146, Clustering Coefficient: 0.0318, Characteristic Path Length: 12.4300, Small-World Metric: 0.0026
-Pheromone scale: 26.8052, Pheromone offset: 13.2964, Clustering Coefficient: 0.0231, Characteristic Path Length: 13.1752, Small-World Metric: 0.0018
-Pheromone scale: 11.5197, Pheromone offset: 12.1411, Clustering Coefficient: 0.0522, Characteristic Path Length: 9.9440, Small-World Metric: 0.0053
-Pheromone scale: 21.2776, Pheromone offset: 5.3759, Clustering Coefficient: 0.0227, Characteristic Path Length: 10.5429, Small-World Metric: 0.0022
-Pheromone scale: 27.0556, Pheromone offset: 6.2124, Clustering Coefficient: 0.0498, Characteristic Path Length: 10.1701, Small-World Metric: 0.0049
-Pheromone scale: 18.5148, Pheromone offset: 5.9468, Clustering Coefficient: 0.0379, Characteristic Path Length: 12.8323, Small-World Metric: 0.0030
-Pheromone scale: 11.9392, Pheromone offset: 13.5183, Clustering Coefficient: 0.0615, Characteristic Path Length: 12.5667, Small-World Metric: 0.0049
-Pheromone scale: 17.1219, Pheromone offset: 14.0965, Clustering Coefficient: 0.0359, Characteristic Path Length: 12.5411, Small-World Metric: 0.0029
-Best Hyperparameters:
-{'decay': 0.1975927921532078, 'pheromone_scale': 27.069166599410984, 'pheromone_offset': 5.269824738631482}
-Best Score: 0.00901490268465485
+Optimization Starting:
+Initial Parameters: {'pheromone_scale': 15, 'pheromone_offset': 10, 'decay': 0.2}
+Initial Small-World Score: 0.01492408331768139
+
+Epoch Progression:
+Epoch      Current Parameters                                 Current Score   Best Score     
+-------------------------------------------------------------------------------------
+0          {'pheromone_scale': 15.08, 'pheromone_offset': 10, 'decay': 0.2} 0.0106          0.0149         
+0          {'pheromone_scale': 15.1, 'pheromone_offset': 10, 'decay': 0.2} 1.1781          1.1781         
+0          {'pheromone_scale': 16.155270359551203, 'pheromone_offset': 10, 'decay': 0.2} 0.0271          1.1781         
+0          {'pheromone_scale': 15.1, 'pheromone_offset': 10.08, 'decay': 0.2} 0.0127          1.1781         
+0          {'pheromone_scale': 15.1, 'pheromone_offset': 10.1, 'decay': 0.2} 0.0125          1.1781         
+0          {'pheromone_scale': 15.1, 'pheromone_offset': 10.12, 'decay': 0.2} 1.7730          1.7730         
+1          {'pheromone_scale': 15.739557793667396, 'pheromone_offset': 10.12, 'decay': 0.2} 2.9050          2.9050         
+1          {'pheromone_scale': 16.473955859402025, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0197          2.9050         
+1          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.12, 'decay': 0.2} 3.7442          3.7442         
+1          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.196399662131611, 'decay': 0.2} 0.0126          3.7442         
+1          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.215499577664515, 'decay': 0.2} 1.4980          3.7442         
+1          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.234599493197416, 'decay': 0.2} 0.8763          3.7442         
+2          {'pheromone_scale': 17.1141305261486, 'pheromone_offset': 10.12, 'decay': 0.2} 2.7306          3.7442         
+2          {'pheromone_scale': 17.237454289548513, 'pheromone_offset': 10.12, 'decay': 0.2} 2.9050          3.7442         
+2          {'pheromone_scale': 17.360778052948422, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0312          3.7442         
+2          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.190033023620643, 'decay': 0.2} 1.6824          3.7442         
+2          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.207541279525804, 'decay': 0.2} 0.0225          3.7442         
+2          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.225049535430966, 'decay': 0.2} 3.3310          3.7442         
+3          {'pheromone_scale': 17.07618475279478, 'pheromone_offset': 10.12, 'decay': 0.2} 1.0052          3.7442         
+3          {'pheromone_scale': 17.190022072856237, 'pheromone_offset': 10.12, 'decay': 0.2} 2.0601          3.7442         
+3          {'pheromone_scale': 17.303859392917694, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0202          3.7442         
+3          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.184645867957517, 'decay': 0.2} 0.0106          3.7442         
+3          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.200807334946896, 'decay': 0.2} 0.0130          3.7442         
+3          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.216968801936275, 'decay': 0.2} 1.9318          3.7442         
+4          {'pheromone_scale': 17.04365980420579, 'pheromone_offset': 10.12, 'decay': 0.2} 1.5751          3.7442         
+4          {'pheromone_scale': 17.149365887120002, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0149          3.7442         
+4          {'pheromone_scale': 17.255071970034212, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0076          3.7442         
+4          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.180028305960551, 'decay': 0.2} 1.4886          3.7442         
+4          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.195035382450689, 'decay': 0.2} 0.0236          3.7442         
+4          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.210042458940828, 'decay': 0.2} 0.6428          3.7442         
+5          {'pheromone_scale': 17.01547151542867, 'pheromone_offset': 10.12, 'decay': 0.2} 1.7787          3.7442         
+5          {'pheromone_scale': 17.1141305261486, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0273          3.7442         
+5          {'pheromone_scale': 17.212789536868527, 'pheromone_offset': 10.12, 'decay': 0.2} 1.4467          3.7442         
+5          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.176026418896514, 'decay': 0.2} 0.0205          3.7442         
+5          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.190033023620643, 'decay': 0.2} 0.0221          3.7442         
+5          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.204039628344772, 'decay': 0.2} 1.5634          3.7442         
+6          {'pheromone_scale': 16.990806762748687, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0262          3.7442         
+6          {'pheromone_scale': 17.083299585298622, 'pheromone_offset': 10.12, 'decay': 0.2} 3.5978          3.7442         
+6          {'pheromone_scale': 17.175792407848554, 'pheromone_offset': 10.12, 'decay': 0.2} 2.8963          3.7442         
+6          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.172524767715482, 'decay': 0.2} 3.2235          3.7442         
+6          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.185655959644354, 'decay': 0.2} 2.5009          3.7442         
+6          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.198787151573224, 'decay': 0.2} 0.0101          3.7442         
+7          {'pheromone_scale': 16.969043745678114, 'pheromone_offset': 10.12, 'decay': 0.2} 3.3471          3.7442         
+7          {'pheromone_scale': 17.056095813960404, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0232          3.7442         
+7          {'pheromone_scale': 17.143147882242697, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0147          3.7442         
+7          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.169435075496924, 'decay': 0.2} 3.6579          3.7442         
+7          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.181793844371155, 'decay': 0.2} 1.8689          3.7442         
+7          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.194152613245388, 'decay': 0.2} 0.0254          3.7442         
+8          {'pheromone_scale': 16.949698841615383, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0175          3.7442         
+8          {'pheromone_scale': 17.03191468388199, 'pheromone_offset': 10.12, 'decay': 0.2} 3.1706          3.7442         
+8          {'pheromone_scale': 17.1141305261486, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0177          3.7442         
+8          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.166688682413762, 'decay': 0.2} 1.9796          3.7442         
+8          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.178360853017203, 'decay': 0.2} 0.0105          3.7442         
+8          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.190033023620643, 'decay': 0.2} 1.5154          3.7442         
+9          {'pheromone_scale': 16.932390243243464, 'pheromone_offset': 10.12, 'decay': 0.2} 0.9895          3.7442         
+9          {'pheromone_scale': 17.010278935917093, 'pheromone_offset': 10.12, 'decay': 0.2} 1.5314          3.7442         
+9          {'pheromone_scale': 17.08816762859072, 'pheromone_offset': 10.12, 'decay': 0.2} 0.7175          3.7442         
+9          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.164231383339354, 'decay': 0.2} 0.0205          3.7442         
+9          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.175289229174192, 'decay': 0.2} 2.2794          3.7442         
+9          {'pheromone_scale': 16.62083547254895, 'pheromone_offset': 10.18634707500903, 'decay': 0.2} 0.0212          3.7442         
+10         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.12, 'decay': 0.2} 5.0594          5.0594         
+10         {'pheromone_scale': 17.256543071383785, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0213          5.0594         
+10         {'pheromone_scale': 17.324489184718793, 'pheromone_offset': 10.12, 'decay': 0.2} 0.7717          5.0594         
+10         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.162019814172385, 'decay': 0.2} 4.8354          5.0594         
+10         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.172524767715482, 'decay': 0.2} 1.3454          5.0594         
+10         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.18302972125858, 'decay': 0.2} 2.3675          5.0594         
+11         {'pheromone_scale': 17.17565484122306, 'pheromone_offset': 10.12, 'decay': 0.2} 0.3892          5.0594         
+11         {'pheromone_scale': 17.240365425351637, 'pheromone_offset': 10.12, 'decay': 0.2} 1.0492          5.0594         
+11         {'pheromone_scale': 17.305076009480217, 'pheromone_offset': 10.12, 'decay': 0.2} 2.2800          5.0594         
+11         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.160018870640368, 'decay': 0.2} 0.7158          5.0594         
+11         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.17002358830046, 'decay': 0.2} 0.0251          5.0594         
+11         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.180028305960551, 'decay': 0.2} 2.8762          5.0594         
+12         {'pheromone_scale': 17.163889280472407, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0177          5.0594         
+12         {'pheromone_scale': 17.225658474413326, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0236          5.0594         
+12         {'pheromone_scale': 17.28742766835424, 'pheromone_offset': 10.12, 'decay': 0.2} 3.1407          5.0594         
+12         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.158199831065804, 'decay': 0.2} 1.4563          5.0594         
+12         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.167749788832257, 'decay': 0.2} 0.0312          5.0594         
+12         {'pheromone_scale': 16.91681250470874, 'pheromone_offset': 10.177299746598708, 'decay': 0.2} 1.9967          5.0594         
+13         {'pheromone_scale': 17.153146811960944, 'pheromone_offset': 10.12, 'decay': 0.2} 0.0197          5.0594         
+13         {'pheromone_scale': 17.212230388773996, 'pheromone_offset': 10.12, 'decay': 0.2} 0.5049          5.0594       
+
+13         {'pheromone_scale': 17.271313965587048, 'pheromone_offset': 10.12, 'decay': 0.2} 10.0351         10.0351        
+
+13         {'pheromone_scale': 17.271313965587048, 'pheromone_offset': 10.156538968845553, 'decay': 0.2} 3.2936          10.0351        
+13         {'pheromone_scale': 17.271313965587048, 'pheromone_offset': 10.165673711056941, 'decay': 0.2} 0.0196          10.0351        
+13         {'pheromone_scale': 17.271313965587048, 'pheromone_offset': 10.17480845326833, 'decay': 0.2} 0.0125          10.0351        

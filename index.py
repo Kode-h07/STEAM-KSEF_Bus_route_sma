@@ -1,4 +1,4 @@
-from data_pp import filtered_df
+from na_data_filtering import filtered_df
 from slime.dish import Dish
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -123,9 +123,75 @@ def characteristic_path_length(G):
     return np.mean(list(path_lengths(G)))
 
 
+def generate_null_model(G):
+    """
+    Generate a null model graph that preserves degree distribution.
+
+    Args:
+        G (nx.Graph): Original graph
+
+    Returns:
+        nx.Graph: Null model graph
+    """
+    # Use configuration model to preserve degree sequence
+    degrees = [d for n, d in G.degree()]
+    null_graph = nx.configuration_model(degrees)
+
+    # Remove parallel edges and self-loops
+    null_graph = nx.Graph(null_graph)
+
+    return null_graph
+
+
+def small_world_coefficient(G):
+    """
+    Calculate small-world coefficient with robustness.
+
+    Args:
+        G (nx.Graph): Input graph
+
+    Returns:
+        float: Small-world coefficient
+    """
+
+    try:
+        # Ensure graph is connected
+        if not nx.is_connected(G):
+            # Get the largest connected component
+            G = G.subgraph(max(nx.connected_components(G), key=len))
+
+        # Generate null model
+        null_graph = generate_null_model(G)
+
+        # Calculate clustering coefficients
+        C_real = clustering_coefficient(G)
+        C_null = clustering_coefficient(null_graph)
+
+        # Calculate characteristic path lengths
+        L_real = characteristic_path_length(G)
+        L_null = characteristic_path_length(null_graph)
+
+        # Prevent division by zero
+        if C_null == 0 or L_null == 0 or L_real == 0:
+            return 0.0
+
+        # Small-world coefficient calculation
+        sigma = (C_real / C_null) / (L_real / L_null)
+
+        return (
+            max(0, min(sigma, 10))
+            if not np.isinf(sigma) and not np.isnan(sigma)
+            else 0.0
+        )
+
+    except Exception as e:
+        print(f"Small-world coefficient error: {e}")
+        return 0.0
+
+
 filtered_df["pheromone"] = (
-    filtered_df["normalized_passenger_count"] * 27.069166599410984
-) + 5.269824738631482
+    filtered_df["normalized_passenger_count"] * 17.271313965587048
+) + 10.12
 
 stations = filtered_df
 # decay is hyperparameter
@@ -136,10 +202,33 @@ dish = Dish(
     start_loc=start_loc,
     mould_shape=(5, 5),
     init_mould_coverage=1,
-    decay=0.1975927921532078,
+    decay=0.2,
 )
-
-dish.animate(frames=500, interval=100, filename="500steps_optimized.gif")
+dish.animate(frames=250, interval=100, filename="valid_250steps_optimized.gif")
+fig = plt.figure(figsize=(6.3, 5))
+nx.draw(
+    dish.food_graph,
+    dish.food_positions,
+    node_color="C1",
+    node_shape="s",
+    node_size=12,
+    with_labels=False,
+    font_size=8,
+)
+plt.savefig("validstations_250steps_optimized.png")
+dish.animate(frames=250, interval=100, filename="valid_500steps_optimized.gif")
+fig = plt.figure(figsize=(6.3, 5))
+nx.draw(
+    dish.food_graph,
+    dish.food_positions,
+    node_color="C1",
+    node_shape="s",
+    node_size=12,
+    with_labels=False,
+    font_size=8,
+)
+plt.savefig("validstations_550steps_optimized.png")
+dish.animate(frames=250, interval=100, filename="valid_750steps_optimized.gif")
 plt.show()
 
 fig = plt.figure(figsize=(6.3, 5))
@@ -150,8 +239,21 @@ nx.draw(
     node_shape="s",
     node_size=12,
     with_labels=False,
+    font_size=8,
 )
-plt.savefig("slime_graph_500steps_optimized.png")
+plt.savefig("validstations_750steps_optimized.png")
+
+graph = dish.food_graph
+sw_coefficient = small_world_coefficient(graph)
+cluster_coef = clustering_coefficient(graph)
+char_path_length = characteristic_path_length(graph)
+
+# Enhanced scoring with more emphasis on small-world metric
+total_score = (
+    sw_coefficient  # Direct small-world coefficient
+    + 0.2 * cluster_coef  # Additional clustering contribution
+    + 0.1 * (1 / (char_path_length + 1))  # Normalized path length efficiency
+)
 
 print("Clustering coefficient:")
 print(
@@ -172,4 +274,4 @@ print(
     + str(len(dish.get_food_graph().edges))
 )
 
-print("adjacency list:" + str(dish.adjacency_list()))
+print("score: " + str(total_score))

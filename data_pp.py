@@ -8,14 +8,20 @@ import matplotlib.pyplot as plt
 
 # Ensure the terminal/console handles EUC-KR encoding
 import sys
+
 sys.stdout.reconfigure(encoding="euc-kr")
 
+
 def apply_hyperparameters(df, pheromone_scale, pheromone_offset):
-    df["pheromone"] = (df["normalized_passenger_count"] * pheromone_scale) + pheromone_offset
+    df["pheromone"] = (
+        df["normalized_passenger_count"] * pheromone_scale
+    ) + pheromone_offset
     return df
 
+
 def calculate_distance(x1, y1, x2, y2):
-    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+
 
 # File path for bus stations CSV
 file_path = "bus_stations.csv"
@@ -34,8 +40,12 @@ filtered_df.loc[:, "lon"] = filtered_df["WGS84lon"]
 min_lon = filtered_df["lon"].min()
 min_lat = filtered_df["lat"].min()
 
-filtered_df.loc[:, "x"] = filtered_df["lon"].apply(lambda x: int((x - min_lon) * (10**3)))
-filtered_df.loc[:, "y"] = filtered_df["lat"].apply(lambda y: int((y - min_lat) * (10**3)))
+filtered_df.loc[:, "x"] = filtered_df["lon"].apply(
+    lambda x: int((x - min_lon) * (10**3))
+)
+filtered_df.loc[:, "y"] = filtered_df["lat"].apply(
+    lambda y: int((y - min_lat) * (10**3))
+)
 
 # Adjust x, y to ensure all coordinates are positive and shifted appropriately
 min_x = filtered_df["x"].min()
@@ -56,14 +66,15 @@ filtered_df = filtered_df.drop(columns=["시군명", "중앙차로여부", "관�
 filtered_df = filtered_df.drop_duplicates(subset=["정류소명"])
 
 
-#filtered_df.to_csv("seorak.csv", encoding="euc-kr", index=True)
+# filtered_df.to_csv("seorak.csv", encoding="euc-kr", index=True)
 
 file_path = "seorak.csv"
 
 # Read the main data CSV using the EUC-KR encoding
 df = pd.read_csv(file_path, encoding="euc-kr")
 
-filtered_df=df
+filtered_df = df
+
 
 # Function to detect file encoding using chardet
 def detect_encoding(file_path):
@@ -71,10 +82,12 @@ def detect_encoding(file_path):
         raw_data = file.read()
     return chardet.detect(raw_data)["encoding"]
 
+
 # Function to safely read CSV with handling for encoding issues
 def safe_read_csv(file_path, encoding):
     with open(file_path, mode="r", encoding=encoding, errors="replace") as file:
         return pd.read_csv(file)
+
 
 # Initialize an array to store passenger counts
 passenger_counts = []
@@ -96,10 +109,12 @@ for stop_name in filtered_df["정류소명"]:
             stop_df = safe_read_csv(file_path, file_encoding)
 
             # Slice the data starting from the 2nd row and 7th column to the right and down
-            passenger_data = stop_df.iloc[1:, 6:]  # Start from 2nd row and 7th column (index 1, 6)
+            passenger_data = stop_df.iloc[
+                1:, 6:
+            ]  # Start from 2nd row and 7th column (index 1, 6)
 
             # Convert the values to numeric, ignoring any errors (coerce invalid values to NaN)
-            passenger_data = passenger_data.apply(pd.to_numeric, errors='coerce')
+            passenger_data = passenger_data.apply(pd.to_numeric, errors="coerce")
 
             # Sum all the numeric values (ignore NaN values)
             passenger_count = passenger_data.sum().sum()
@@ -108,7 +123,9 @@ for stop_name in filtered_df["정류소명"]:
             passenger_counts.append(passenger_count)
         except Exception as e:
             print(f"Error processing {csv_file}: {str(e)}")
-            passenger_counts.append(999)  # Use 999 as an error indicator if there's a problem
+            passenger_counts.append(
+                999
+            )  # Use 999 as an error indicator if there's a problem
     else:
         passenger_counts.append(999)  # Use 999 if the file doesn't exist
 
@@ -122,8 +139,10 @@ missing_stations = filtered_df[filtered_df["passenger_count"] == 999].copy()
 
 # Step 3: For each missing station, find the closest valid station
 for index, missing_station in missing_stations.iterrows():
-    min_distance = float('inf')
-    nearest_station_passenger_count = 999  # Default to 999 if no station is found (safety check)
+    min_distance = float("inf")
+    nearest_station_passenger_count = (
+        999  # Default to 999 if no station is found (safety check)
+    )
 
     # Get the x, y coordinates of the missing station
     missing_x = missing_station["x"]
@@ -151,15 +170,22 @@ max_passenger_count = filtered_df["passenger_count"].max()
 
 # Avoid division by zero in case all values are the same
 if min_passenger_count != max_passenger_count:
-    filtered_df["normalized_passenger_count"] = (filtered_df["passenger_count"] - min_passenger_count) / (max_passenger_count - min_passenger_count)
+    filtered_df["normalized_passenger_count"] = (
+        filtered_df["passenger_count"] - min_passenger_count
+    ) / (max_passenger_count - min_passenger_count)
 else:
-    filtered_df["normalized_passenger_count"] = 0  # All values are the same, so set to 0 (or 1 depending on the choice)
+    filtered_df["normalized_passenger_count"] = (
+        0  # All values are the same, so set to 0 (or 1 depending on the choice)
+    )
 
 # Print the normalized passenger count for verification
 
-# Multiply the normalized passenger count by 15 and add 5 
-#hyperparameter
-filtered_df["pheromone"] = (filtered_df["normalized_passenger_count"] * 19.861105709313733) + 8.738
+# Multiply the normalized passenger count by 15 and add 5
+# hyperparameter
+filtered_df["pheromone"] = (
+    filtered_df["normalized_passenger_count"] * 19.861105709313733
+) + 8.738
 
+print(type(filtered_df))
 # Optionally, save the results to a new CSV file
 filtered_df.to_csv("seorak.csv", encoding="euc-kr", index=False)

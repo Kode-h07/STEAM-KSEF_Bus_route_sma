@@ -1,0 +1,8 @@
+original graph: 69 edges, 
+score: 0.0077 
+clustering coefficient: 0.001
+Path length: 12.011082693947143
+
+
+simulation graph: 74 edges, 
+score in range of 0.125~10.5 after 75 simulation and optimization for hyperparameter.

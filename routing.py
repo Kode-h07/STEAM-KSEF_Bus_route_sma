@@ -1,162 +1,286 @@
+import pandas as pd
 import networkx as nx
-import numpy as np
-import random
-import gym
-from gym import spaces
-from stable_baselines3 import PPO
 import matplotlib.pyplot as plt
+from na_data_filtering import filtered_df
+import numpy as np  # Assuming filtered_df is properly imported
 
 
-# Step 1: Convert Adjacency List to Graph
-def create_graph_from_adj_list(adj_list):
+def degrees(G):
+    """List of degrees for nodes in `G`.
+
+    G: Graph object
+
+    returns: list of int
     """
-    Converts an adjacency list to a NetworkX graph.
-    :param adj_list: Dictionary representing adjacency list {node: [list of connected nodes]}
-    :return: NetworkX Graph object
+    return [G.degree(u) for u in G]
+
+
+def savefig(filename, **options):
+    """Save the current figure.
+
+    Keyword arguments are passed along to plt.savefig
+
+    https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html
+
+    filename: string
     """
-    G = nx.Graph()
-    for node, neighbors in adj_list.items():
-        for neighbor in neighbors:
-            G.add_edge(
-                node, neighbor, weight=np.random.randint(1, 10)
-            )  # Random edge weights
-    return G
+    print("Saving figure to file", filename)
+    plt.savefig(filename, **options)
 
 
-# Example adjacency list input
-adj_list = {
-    0: [1, 2],
-    1: [0, 3, 4],
-    2: [0, 5],
-    3: [1, 6],
-    4: [1, 6, 7],
-    5: [2, 8],
-    6: [3, 4, 9],
-    7: [4, 10],
-    8: [5, 11],
-    9: [6],
-    10: [7],
-    11: [8],
+def underride(d, **options):
+    """Add key-value pairs to d only if key is not in d.
+
+    d: dictionary
+    options: keyword args to add to d
+    """
+    for key, val in options.items():
+        d.setdefault(key, val)
+
+    return d
+
+
+def legend(**options):
+    """Draws a legend only if there is at least one labeled item.
+
+    options are passed to plt.legend()
+    https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html
+
+    """
+    underride(options, loc="best", frameon=False)
+
+    ax = plt.gca()
+    handles, labels = ax.get_legend_handles_labels()
+    if handles:
+        ax.legend(handles, labels, **options)
+
+
+def decorate(**options):
+    """Decorate the current axes.
+
+    Call decorate with keyword arguments like
+
+    decorate(title='Title',
+             xlabel='x',
+             ylabel='y')
+
+    The keyword arguments can be any of the axis properties
+
+    https://matplotlib.org/api/axes_api.html
+
+    In addition, you can use `legend=False` to suppress the legend.
+
+    And you can use `loc` to indicate the location of the legend
+    (the default value is 'best')
+    """
+    loc = options.pop("loc", "best")
+    if options.pop("legend", True):
+        legend(loc=loc)
+
+    plt.gca().set(**options)
+    plt.tight_layout()
+
+
+def all_pairs(nodes):
+    """Generates all pairs of nodes."""
+    for i, u in enumerate(nodes):
+        for j, v in enumerate(nodes):
+            if i < j:
+                yield u, v
+
+
+def node_clustering(G, u):
+    neighbors = list(G.neighbors(u))
+    k = len(neighbors)
+
+    print(f"\nNode {u}:")
+    print(f"Neighbors: {neighbors}")
+
+    if k < 2:
+        print("Less than 2 neighbors, returning NaN")
+        return np.nan
+
+    # Explicitly check edges between all neighbor pairs
+    edges_exist = []
+    triangles = 0
+    for i in range(len(neighbors)):
+        for j in range(i + 1, len(neighbors)):
+            v, w = neighbors[i], neighbors[j]
+            edge_exists = G.has_edge(v, w)
+            edges_exist.append(edge_exists)
+            if edge_exists:
+                triangles += 1
+
+    print(f"Edges between neighbors: {edges_exist}")
+    print(f"Number of triangles: {triangles}")
+
+    # Maximum possible edges between k neighbors
+    max_possible_edges = k * (k - 1) / 2
+
+    coefficient = triangles / max_possible_edges if max_possible_edges > 0 else 0
+    print(f"Clustering coefficient: {coefficient}")
+
+    return coefficient
+
+
+def clustering_coefficient(G):
+    """Average of the local clustering coefficients.
+
+    G: Graph
+
+    returns: float
+    """
+    cu = [node_clustering(G, node) for node in G]
+    return np.nanmean(cu)
+
+
+def path_lengths(G):
+    length_iter = nx.shortest_path_length(G)
+    for source, dist_map in length_iter:
+        for dest, dist in dist_map.items():
+            if source != dest:
+                yield dist
+
+
+def characteristic_path_length(G):
+    return np.mean(list(path_lengths(G)))
+
+
+def generate_null_model(G):
+    """
+    Generate a null model graph that preserves degree distribution.
+
+    Args:
+        G (nx.Graph): Original graph
+
+    Returns:
+        nx.Graph: Null model graph
+    """
+    # Use configuration model to preserve degree sequence
+    degrees = [d for n, d in G.degree()]
+    null_graph = nx.configuration_model(degrees)
+
+    # Remove parallel edges and self-loops
+    null_graph = nx.Graph(null_graph)
+
+    return null_graph
+
+
+def small_world_coefficient(G):
+    """
+    Calculate small-world coefficient with robustness.
+
+    Args:
+        G (nx.Graph): Input graph
+
+    Returns:
+        float: Small-world coefficient
+    """
+
+    try:
+        # Ensure graph is connected
+        if not nx.is_connected(G):
+            # Get the largest connected component
+            G = G.subgraph(max(nx.connected_components(G), key=len))
+
+        # Generate null model
+        null_graph = generate_null_model(G)
+
+        # Calculate clustering coefficients
+        C_real = clustering_coefficient(G)
+        C_null = clustering_coefficient(null_graph)
+
+        # Calculate characteristic path lengths
+        L_real = characteristic_path_length(G)
+        L_null = characteristic_path_length(null_graph)
+
+        # Prevent division by zero
+        if C_null == 0 or L_null == 0 or L_real == 0:
+            return 0.0
+
+        # Small-world coefficient calculation
+        sigma = (C_real / C_null) / (L_real / L_null)
+
+        return (
+            max(0, min(sigma, 10))
+            if not np.isinf(sigma) and not np.isnan(sigma)
+            else 0.0
+        )
+
+    except Exception as e:
+        print(f"Small-world coefficient error: {e}")
+        return 0.0
+
+
+# Data Import: Load the connections data from the CSV file
+lines_df = pd.read_csv("lines.csv", header=None)
+
+# Graph Creation: Create a new empty graph G
+G = nx.Graph()
+
+# Iterate over each row and treat each non-empty value as a bus station connection
+for index, row in lines_df.iterrows():
+    # Create a list of stations, converting to string integers
+    stations = [
+        str(int(float(station)))
+        for station in row
+        if pd.notna(station) and str(station).strip()
+    ]
+    # Create edges between consecutive stations in the list
+    for i in range(len(stations) - 1):
+        G.add_edge(stations[i], stations[i + 1])
+
+# Optional Node Positions: Fetch positions from filtered_df with consistent type conversion
+node_positions = {
+    str(int(float(row["Unnamed: 0"]))): (row["x"], row["y"])
+    for index, row in filtered_df.iterrows()
+    if pd.notna(row["Unnamed: 0"]) and pd.notna(row["x"]) and pd.notna(row["y"])
 }
 
-# Create the graph
-graph = create_graph_from_adj_list(adj_list)
+# Debugging: Check which nodes are in the graph but not in node_positions
+missing_nodes = [node for node in G.nodes if str(node) not in node_positions]
+if missing_nodes:
+    print(f"Nodes missing positions: {missing_nodes}")
+
+# Graph Plotting: Draw the graph with custom settings
+plt.figure(figsize=(10, 8))
+try:
+    nx.draw(
+        G,
+        pos=node_positions,
+        node_color="C1",
+        node_shape="s",
+        node_size=12,
+        with_labels=False,
+        font_size=8,
+    )
+    plt.savefig("originalnetwork.png")
+except nx.NetworkXError as e:
+    print(f"Error: {e}")
+    missing_nodes = [node for node in G.nodes if str(node) not in node_positions]
+    print(f"Nodes missing positions: {missing_nodes}")
 
 
-# Step 2: Define the Environment
-class BusRouteEnv(gym.Env):
-    def __init__(self, graph, max_routes=8, max_stops_per_route=15):
-        super(BusRouteEnv, self).__init__()
-        self.graph = graph
-        self.nodes = list(graph.nodes)
-        self.num_nodes = len(self.nodes)
-        self.max_routes = max_routes
-        self.max_stops_per_route = max_stops_per_route
+graph = G
+sw_coefficient = small_world_coefficient(graph)
+cluster_coef = clustering_coefficient(graph)
+char_path_length = characteristic_path_length(graph)
 
-        # Action space: Choose the next node to visit
-        self.action_space = spaces.Discrete(self.num_nodes)
+# Enhanced scoring with more emphasis on small-world metric
+total_score = (
+    sw_coefficient  # Direct small-world coefficient
+    + 0.2 * cluster_coef  # Additional clustering contribution
+    + 0.1 * (1 / (char_path_length + 1))  # Normalized path length efficiency
+)
 
-        # Observation space: Current node and route progress
-        self.observation_space = spaces.Dict(
-            {
-                "current_node": spaces.Discrete(self.num_nodes),
-                "route_progress": spaces.Box(
-                    0, max_stops_per_route, shape=(max_routes,)
-                ),
-            }
-        )
+print("Clustering coefficient:")
+print("Graph connected : " + str(cluster_coef))
+print()
 
-        # Initialize state
-        self.reset()
+print("Path length:")
+print("Graph connected : " + str(characteristic_path_length(graph)))
+print()
 
-    def reset(self):
-        self.routes = [[] for _ in range(self.max_routes)]  # List of routes
-        self.route_index = 0  # Current route being built
-        self.visited_nodes = set()  # Set of visited nodes
-        self.current_node = random.choice(self.nodes)  # Start from a random node
-        return {
-            "current_node": self.current_node,
-            "route_progress": np.zeros(self.max_routes),
-        }
+print("Number of edges in the graph : " + str(len(graph.edges())))
 
-    def step(self, action):
-        reward = 0
-        done = False
-
-        if action in self.visited_nodes:
-            reward = -1  # Penalize visiting the same node
-        elif len(self.routes[self.route_index]) < self.max_stops_per_route:
-            # Add node to the current route
-            self.routes[self.route_index].append(action)
-            self.visited_nodes.add(action)
-            self.current_node = action
-            reward = 1  # Reward for visiting a new node
-        else:
-            # Move to the next route if the current route is full
-            self.route_index += 1
-            if self.route_index >= self.max_routes:
-                done = True  # All routes are full
-
-        # Check if all nodes are covered
-        if len(self.visited_nodes) == self.num_nodes:
-            reward += 10  # Bonus for covering all nodes
-            done = True
-
-        obs = {
-            "current_node": self.current_node,
-            "route_progress": np.array([len(r) for r in self.routes]),
-        }
-        return obs, reward, done, {}
-
-    def render(self, mode="human"):
-        # Visualize the routes
-        colors = ["r", "g", "b", "y", "c", "m", "orange", "purple"]
-        pos = nx.spring_layout(self.graph)
-        nx.draw(
-            self.graph, pos, with_labels=True, node_color="lightgray", edge_color="gray"
-        )
-        for i, route in enumerate(self.routes):
-            if len(route) > 1:
-                nx.draw_networkx_edges(
-                    self.graph,
-                    pos,
-                    edgelist=[(route[j], route[j + 1]) for j in range(len(route) - 1)],
-                    edge_color=colors[i % len(colors)],
-                    width=2,
-                )
-        plt.show()
-
-    def save_routes_to_file(self, file_path):
-        """
-        Save the bus routes to a file with comma-separated node connections.
-        """
-        with open(file_path, "w") as file:
-            file.write("Bus Routes (Nodes in Connection Order):\n")
-            for i, route in enumerate(self.routes):
-                if route:
-                    route_line = f"Route {i+1}: {', '.join(map(str, route))}\n"
-                    file.write(route_line)
-
-
-# Step 3: Train the Model
-env = BusRouteEnv(graph)
-
-# Use Proximal Policy Optimization (PPO) for training
-model = PPO("MultiInputPolicy", env, verbose=1)
-model.learn(total_timesteps=10000)
-
-# Step 4: Evaluate the Model
-obs = env.reset()
-for _ in range(100):
-    action, _states = model.predict(obs)
-    obs, rewards, done, info = env.step(action)
-    if done:
-        break
-
-# Render the results
-env.render()
-
-# Save the routes to a file
-file_path = "/mnt/data/bus_routes.txt"
-env.save_routes_to_file(file_path)
-print(f"Bus routes have been saved to: {file_path}")
+print("original graph score: " + str(total_score))
